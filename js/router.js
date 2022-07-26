@@ -18,7 +18,14 @@ export default function router(URI) {
     const routes = {
         '/': {
             returnView: Home,
-            state: {},
+            state: {
+                movies: {
+                    url: "https://vanilla-ringed-winterberry.glitch.me/movies",
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }
+            },
             uri: '/',
             title: 'Home',
             viewEvent: HomeEvents
