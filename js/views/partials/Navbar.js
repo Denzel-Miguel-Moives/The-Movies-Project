@@ -8,8 +8,8 @@ export default function Navbar(props) {
         <nav>
             <a class="jalopy-nav" href="/" data-link>Home</a>`;
 
-    // everyone can see about
-    html = html + `<a class="jalopy-nav" href="/about" data-link>About</a>`;
+    // everyone can see add movie
+    html = html + `<a class="jalopy-nav" href="/movies" data-link>Add Movie</a>`;
 
     // only logged in can see user info and logout
     if(loggedIn) {
@@ -20,6 +20,7 @@ export default function Navbar(props) {
         html = html + `<a class="jalopy-nav" href="/login" data-link>Login</a>
         <a class="jalopy-nav" href="/register" data-link>Register</a>`;
     }
+
 
     html = html + `</nav>`;
     return html;
