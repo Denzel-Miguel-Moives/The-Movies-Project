@@ -1,5 +1,6 @@
 import {showNotification} from "../messaging.js";
 import {getUser} from "../auth.js";
+import createView from "../createView.js";
 
 const BASE_URI = `${BACKEND_HOST}/api/s3/download`;
 
@@ -8,25 +9,19 @@ export default function Home(props) {
 
     let html = `
     <h1>Movies</h1>
-    <table id="my-quotes " class="table  table-striped"> `;
+    <table id="movies" class="table  table-striped"> `;
 
     //add a table row for each table element
     for (let i = 0; i < props.movies.length; i++) {
         html += `
         <tr>
         <td>
-        "${props.movies[i].title}"  
-       
-</td>
-</tr>
- <tr>
-        <td>
-      
-       
-</td>
-</tr>
-
-        `
+        ${props.movies[i].title}  ${props.movies[i].rating}
+        <a href="/movies" data-id="${props.movies[i].id}">Edit</a>
+        <button class="delete-btn" data-id="${props.movies[i].id}">Delete</button>
+        </td>
+        </tr>
+        `;
     }
     html+= `
    </table>
@@ -37,14 +32,37 @@ export default function Home(props) {
 
 }
 
+
 export function HomeEvents() {
-    // // TODO: use an enum for message type
-    // // const authority = getUserRole();
-    // const user = getUser();
-    // if(!user) {
-    //     showNotification("Welcome visitor", "secondary");
-    // } else {
-    //     showNotification("Welcome " + user.userName, "info");
-    // }
+
+    let deleteBtn = document.getElementsByClassName('delete-btn');
+    for (let i = 0; i < deleteBtn.length; i++) {
+        deleteBtn[i].addEventListener('click', deleteMovie)
+
+
+    }
 
 }
+
+function  deleteMovie() {
+    const requestOptions = {
+        method: "DELETE",
+    }
+    const dataID = this.getAttribute('data-id')
+    fetch(`https://vanilla-ringed-winterberry.glitch.me/movies/${dataID}`, requestOptions)
+        .then(function (response) {
+            if (!response.ok) {
+                console.log("error: " + response.status);
+            } else {
+                console.log("add ok");
+                createView("/");
+            }
+        });
+}
+
+    // const user = getUser();
+    // if(!user) {
+    //     showNotification('Welcome', 'secondary')
+    // } else {
+    //     showNotification('Welcome' + user.userName, 'info')
+    // }

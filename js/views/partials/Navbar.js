@@ -11,6 +11,7 @@ export default function Navbar(props) {
     // everyone can see add movie
     html = html + `<a class="jalopy-nav" href="/movies" data-link>Add Movie</a>`;
 
+
     // only logged in can see user info and logout
     if(loggedIn) {
         html = html + `<a class="jalopy-nav" href="/users" data-link>User Info</a>
