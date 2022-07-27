@@ -24,7 +24,7 @@ export function InsertMovieEvents() {
 }
 
 function insertMovie() {
-    // 1. validate the data (quote and author)
+    // 1. validate the data (movie and director)
     const movieInput = document.querySelector("#movieInput");
     const movieText = movieInput.value.trim();
 
@@ -40,7 +40,7 @@ function insertMovie() {
     }
 
     const newMovie = {
-        movie: movieText,
+        title: movieText,
         rating: ratingText
     }
 
