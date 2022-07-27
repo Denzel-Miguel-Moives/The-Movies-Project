@@ -17,8 +17,7 @@ export default function Home(props) {
         <tr>
         <td>
         ${props.movies[i].title}  ${props.movies[i].rating}
-        <button id="edit-button" class="edit" type="button">Edit</button>
-<!--        <input id="save-button" class="save" type="button" value="Save" onclick="saveRow">-->
+        <a href="/movies" data-id="${props.movies[i].id}">Edit</a>
         <button class="delete-btn" data-id="${props.movies[i].id}">Delete</button>
         </td>
         </tr>
