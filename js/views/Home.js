@@ -54,44 +54,46 @@ export default function Home(props) {
 <!--      Title for the movie listing -->
      <h1><em>Top Box Office</em></h1>
  `;
-let imagePath = [
-    "assets/Hulk.jpeg",
-    "assets/Spiderman.jpeg",
-    "assets/Pulp_Fiction.jpeg",
-    "assets/BruceLee.jpeg",
-    "assets/The_Dark_Knight.jpeg",
-    "assets/GodFarther.jpeg",
-    "assets/StarWars.jpeg",
-    "assets/ForrestGump.jpeg",
-    "assets/Titanic.jpeg",
-    "assets/ComingSoon.jpeg",
-    "assets/ComingSoon.jpeg",
-    "assets/ComingSoon.jpeg",
-    "assets/ComingSoon.jpeg",
-    "assets/ComingSoon.jpeg",
-    "assets/ComingSoon.jpeg",
-    "assets/ComingSoon.jpeg",
-    "assets/ComingSoon.jpeg",
+    let imagePath = [
+        "assets/Hulk.jpeg",
+        "assets/Spiderman.jpeg",
+        "assets/Pulp_Fiction.jpeg",
+        "assets/BruceLee.jpeg",
+        "assets/The_Dark_Knight.jpeg",
+        "assets/GodFarther.jpeg",
+        "assets/StarWars.jpeg",
+        "assets/ForrestGump.jpeg",
+        "assets/Titanic.jpeg",
+        "assets/ComingSoon.jpeg",
+        "assets/ComingSoon.jpeg",
+        "assets/ComingSoon.jpeg",
+        "assets/ComingSoon.jpeg",
+        "assets/ComingSoon.jpeg",
+        "assets/ComingSoon.jpeg",
+        "assets/ComingSoon.jpeg",
+        "assets/ComingSoon.jpeg",
 
 
 
-]
+    ]
 
-
-
+    html += `
+<div class="container">
+<div class="row">
+`;
     //add a table row for each table element
     for (let i = 0; i < props.movies.length; i++) {
-
-
 
         html += `
         <!--
           Movie section 
         -->
 
-        <div class="flex-grid">
+ 
 
-          <div class="movie-card">
+        
+
+          <div class="movie-card col-3">
 
             <div class="card-head">
               <img src="${imagePath[i]}" width="1px" height="em" class="card-img">
@@ -119,16 +121,21 @@ let imagePath = [
                 <button class="edit-btn" data-id="${props.movies[i].id}">Edit</button>
                 <button class="delete-btn" data-id="${props.movies[i].id}">Delete</button>
               <div class="card-info">
-                <span class="genre" style="color:rgb(138, 0, 252);"> ${props.movies[i].genre}</span>
+                
                 
               </div>
             </div>
             <!--end of card  -->
           </div>
-        </div>
+ 
             `;
     }
+
+
     html+= `
+       </div>
+    </div>
+
    </div>
   
 
@@ -139,6 +146,7 @@ let imagePath = [
 }
 
 
+
 export function HomeEvents() {
 
     let deleteBtn = document.getElementsByClassName('delete-btn');
@@ -146,10 +154,10 @@ export function HomeEvents() {
         deleteBtn[i].addEventListener('click', deleteMovie)
     }
 
-    // let editBtn = document.getElementsByClassName('edit-btn');
-    // for (let i = 0; i < editBtn.length; i++) {
-    //     editBtn[i].addEventListener('click', editMovie)
-    // }
+    let editBtn = document.querySelectorAll('.edit-btn');
+    for (let i = 0; i < editBtn.length; i++) {
+        editBtn[i].addEventListener('click', editMovie)
+    }
 
 }
 
@@ -168,60 +176,64 @@ export function HomeEvents() {
                 }
             });
     }
-let editBtn = document.getElementsByClassName('edit-btn')
-for (let i = 0; i < editBtn.length; i++) {
-    editBtn[i].addEventListener("click", function () {
-
-        // let userMovieTitle = prompt("enter movie")
-        let newMovie = ""
-
-        // newMovie = userMovieTitle
-        let editMovies = {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({title: newMovie})
-        }
-
-        let dataID = props.movies[i].id;
-
-        fetch(`https://vanilla-ringed-winterberry.glitch.me/movies/${dataID}`, editMovies)
-            .then(function (response) {
-                if (!response.ok) {
-                    console.log("movie added error: " + response.status);
-                } else {
-                    console.log("movie updated");
-                    createView('/');
-                }
-            });
-
-    })
-}
-
-
-//     function editMovie() {
-//         let userInput = prompt("Enter Movie name")
-//         let newMovie = ""
-//         newMovie = userInput
-//     const requestOptions = {
-//         method: "PATCH",
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(newMovie)
-//     }
-//     const dataID = movies[0].id
-//     fetch(`https://vanilla-ringed-winterberry.glitch.me/movies/${dataID}`, requestOptions)
-//         .then(function (response) {
-//             if (!response.ok) {
-//                 console.log("error: " + response.status);
-//             } else {
-//                 console.log("add ok");
-//                 createView("/");
-//             }
-//         });
+// let editBtn = document.getElementsByClassName('edit-btn')
+// let editBtn = document.querySelectorAll('.edit-btn')
+// console.log(editBtn);
+// console.log(editBtn.length);
+// for (let i = 0; i < editBtn.length; i++) {
+//     console.log([i]);
+//     editBtn[i].addEventListener("click", function () {
+//         console.log("asd")
 //
+//         let newMovie = prompt("enter movie")
+//
+//         let editMovies = {
+//             method: "PATCH",
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({title: newMovie})
+//         }
+//
+//         let dataID = props.movies[i].id;
+//
+//         fetch(`https://vanilla-ringed-winterberry.glitch.me/movies/${dataID}`, editMovies)
+//             .then(function (response) {
+//                 if (!response.ok) {
+//                     console.log("movie added error: " + response.status);
+//                 } else {
+//                     console.log("movie updated");
+//                     createView('/');
+//                 }
+//             });
+//
+//     })
 // }
+
+
+function editMovie(props) {
+    let newMovie = prompt("Enter Movie name")
+    console.log(newMovie)
+        // let newMovie = ""
+        // newMovie = userInput
+    const requestOptions = {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({title: newMovie})
+    }
+    const dataID = this.getAttribute('data-id');
+    fetch(`https://vanilla-ringed-winterberry.glitch.me/movies/${dataID}`, requestOptions)
+        .then(function (response) {
+            if (!response.ok) {
+                console.log("error: " + response.status);
+            } else {
+                console.log("add ok");
+                createView("/");
+            }
+        });
+
+}
 
 

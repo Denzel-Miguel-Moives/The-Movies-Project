@@ -291,3 +291,8 @@ circle#popcrncirlce {
         transform: translate(0px, 100px);
     }
 }
+
+.edit-btn, .delete-btn {
+    color: #8a00fc;
+}
+
