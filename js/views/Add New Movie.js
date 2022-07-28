@@ -4,12 +4,12 @@ import {showNotification} from "../messaging.js";
 export default function InsertMovie(props) {
     return `
         <form class="container">
-            <h1>New Movie</h1>
+            <h1 style="color:white;">New Movie</h1>
             <form>
-                <label for="movieInput" class="form-label">Movie</label>
-                <input class="form-control" list="datalistOptions" id="movieInput" placeholder="Enter Movie">
+                <label for="movieInput" class="form-label" style="color:rgb(138, 0, 252);">Movie</label>
+                <input  class="form-control" list="datalistOptions" id="movieInput" placeholder="Enter Movie" >
 
-                <label for="ratingInput" class="form-label">Rating</label>
+                <label for="ratingInput" class="form-label" style="color:rgb(138, 0, 252);">Rating</label>
                 <input class="form-control" list="datalistOptions" id="ratingInput" placeholder="Enter Rating">
 
                 <button class="form-control" id="insert-btn">Add Movie</button>

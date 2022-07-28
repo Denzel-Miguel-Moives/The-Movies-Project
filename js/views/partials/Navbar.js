@@ -5,7 +5,7 @@ export default function Navbar(props) {
 
     // everyone can see home
     let html = `
-        <nav>
+        <nav class="navbar navbar-expand-lg bg-dark justify-content-center">
             <a class="jalopy-nav" href="/" data-link>Home</a>`;
 
     // everyone can see add movie
