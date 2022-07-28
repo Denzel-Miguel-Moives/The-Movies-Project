@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <input id="movie-title" class="text-input" type="text" value="${props.movies[i].title}">
+        <input id="movie-rating" class="text-input" type="text" value="${props.movies[i].rating}">
+        <!--        <a data-link href="/EditMovies.js">Edit</a>-->
+        <button class="edit-btn" data-id="${props.movies[i].id}">Edit</button>
+        <button class="delete-btn" data-id="${props.movies[i].id}">Delete</button>
+    </div>
+</div>
+
+</body>
+</html>

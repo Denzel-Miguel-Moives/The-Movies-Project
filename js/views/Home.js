@@ -116,7 +116,8 @@ let imagePath = [
 
             <div class="card-body">
               <h3 class="card-title"style="color:rgb(138, 0, 252);" >${props.movies[i].title}</h3>
-
+                <button class="edit-btn" data-id="${props.movies[i].id}">Edit</button>
+                <button class="delete-btn" data-id="${props.movies[i].id}">Delete</button>
               <div class="card-info">
                 <span class="genre" style="color:rgb(138, 0, 252);"> ${props.movies[i].genre}</span>
                 
@@ -130,6 +131,7 @@ let imagePath = [
     html+= `
    </div>
   
+
 `;
 
     return  html
@@ -142,31 +144,84 @@ export function HomeEvents() {
     let deleteBtn = document.getElementsByClassName('delete-btn');
     for (let i = 0; i < deleteBtn.length; i++) {
         deleteBtn[i].addEventListener('click', deleteMovie)
-
-
     }
 
-}
-
-function  deleteMovie() {
-    const requestOptions = {
-        method: "DELETE",
-    }
-    const dataID = this.getAttribute('data-id')
-    fetch(`https://vanilla-ringed-winterberry.glitch.me/movies/${dataID}`, requestOptions)
-        .then(function (response) {
-            if (!response.ok) {
-                console.log("error: " + response.status);
-            } else {
-                console.log("add ok");
-                createView("/");
-            }
-        });
-}
-
-    // const user = getUser();
-    // if(!user) {
-    //     showNotification('Welcome', 'secondary')
-    // } else {
-    //     showNotification('Welcome' + user.userName, 'info')
+    // let editBtn = document.getElementsByClassName('edit-btn');
+    // for (let i = 0; i < editBtn.length; i++) {
+    //     editBtn[i].addEventListener('click', editMovie)
     // }
+
+}
+
+    function deleteMovie() {
+        const requestOptions = {
+            method: "DELETE",
+        }
+        const dataID = this.getAttribute('data-id')
+        fetch(`https://vanilla-ringed-winterberry.glitch.me/movies/${dataID}`, requestOptions)
+            .then(function (response) {
+                if (!response.ok) {
+                    console.log("error: " + response.status);
+                } else {
+                    console.log("add ok");
+                    createView("/");
+                }
+            });
+    }
+let editBtn = document.getElementsByClassName('edit-btn')
+for (let i = 0; i < editBtn.length; i++) {
+    editBtn[i].addEventListener("click", function () {
+
+        // let userMovieTitle = prompt("enter movie")
+        let newMovie = ""
+
+        // newMovie = userMovieTitle
+        let editMovies = {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({title: newMovie})
+        }
+
+        let dataID = props.movies[i].id;
+
+        fetch(`https://vanilla-ringed-winterberry.glitch.me/movies/${dataID}`, editMovies)
+            .then(function (response) {
+                if (!response.ok) {
+                    console.log("movie added error: " + response.status);
+                } else {
+                    console.log("movie updated");
+                    createView('/');
+                }
+            });
+
+    })
+}
+
+
+//     function editMovie() {
+//         let userInput = prompt("Enter Movie name")
+//         let newMovie = ""
+//         newMovie = userInput
+//     const requestOptions = {
+//         method: "PATCH",
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(newMovie)
+//     }
+//     const dataID = movies[0].id
+//     fetch(`https://vanilla-ringed-winterberry.glitch.me/movies/${dataID}`, requestOptions)
+//         .then(function (response) {
+//             if (!response.ok) {
+//                 console.log("error: " + response.status);
+//             } else {
+//                 console.log("add ok");
+//                 createView("/");
+//             }
+//         });
+//
+// }
+
+
