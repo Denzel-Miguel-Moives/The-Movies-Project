@@ -9,12 +9,12 @@ export default function EditMovie(props) {
             <h1>Edit Movie</h1>
             <form>
                 <label for="movieInput" class="form-label">Movie</label>
-                <input class="form-control" list="datalistOptions" id="movieInput" placeholder="Enter Movie">
+                <input class="form-control" list="datalistOptions" id="movieI" placeholder="Enter Movie">
 
                 <label for="ratingInput" class="form-label">Rating</label>
-                <input class="form-control" list="datalistOptions" id="ratingInput" placeholder="Enter Rating">
+                <input class="form-control" list="datalistOptions" id="ratingI" placeholder="Enter Rating">
 
-                <button class="form-control" id="insert-btn">Edit Movie</button>
+                <button class="form-control" id="edit-btn">Edit Movie</button>
             </form>
         </div>
 `;
@@ -22,7 +22,7 @@ export default function EditMovie(props) {
 
 
 export function EditMovieEvents() {
-    const editButton = document.querySelector("#insert-btn");
+    const editButton = document.querySelector("#edit-btn");
     editButton.addEventListener("click", editMovie);
 }
 
@@ -55,7 +55,8 @@ function editMovie() {
         },
         body: JSON.stringify(movieE)
     }
-    fetch("https://vanilla-ringed-winterberry.glitch.me/movies", requestOptions)
+    const dataID = this.getAttribute('data-id')
+    fetch(`https://vanilla-ringed-winterberry.glitch.me/movies/${dataID}`, requestOptions)
         .then(function(response) {
             if(!response.ok) {
                 console.log("edit movie error: " + response.status);
